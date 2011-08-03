@@ -1,14 +1,14 @@
 # -*- encoding: utf-8 -*-
 $:.push File.expand_path("../lib", __FILE__)
-require 'melissa-data/version'
+require 'melissadata/version'
 
 Gem::Specification.new do |s|
-  s.name = 'melissa-data'
+  s.name = 'melissadata'
   s.version = MelissaData::VERSION
   s.platform = Gem::Platform::RUBY
   s.authors = ['JohnnyT', 'Chris Wyckoff']
   s.email = ['johnnyt@xan.do', 'cwyckoff@alliancehealth.com']
-  s.homepage = 'http://github.com/johnnyt/melissa-data'
+  s.homepage = 'http://github.com/johnnyt/melissadata'
   s.summary = 'Ruby wrappers around MelissaData objects'
   s.description = s.summary
   s.require_paths = %w[ lib ]
@@ -25,4 +25,5 @@ Gem::Specification.new do |s|
   s.add_dependency 'msgpack-rpc'
   s.add_dependency 'awesome_print'
   s.add_dependency 'yajl-ruby'
+  s.add_dependency 'cloudfiles'
 end
