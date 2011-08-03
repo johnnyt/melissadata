@@ -1,0 +1,16 @@
+Gemfile.lock
+
+.bundle/
+doc/
+pkg/
+_site
+
+.yardoc
+.livereload
+.rvmrc
+
+*.swp
+*.watchr
+*.rbc
+
+.vagrant
