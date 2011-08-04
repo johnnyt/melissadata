@@ -7,3 +7,4 @@ end
 
 # The built-in commands must always be loaded
 require 'melissadata/command/package'
+require 'melissadata/command/compile'
