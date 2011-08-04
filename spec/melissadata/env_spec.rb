@@ -1,5 +1,4 @@
 require 'spec_helper'
-require 'melissa-data/env'
 
 describe MelissaData::Env do
   before(:each) do
@@ -52,4 +51,5 @@ describe MelissaData::Env do
       @env.respond_to?(:[]).should be_true
     end
   end
+
 end

@@ -1,4 +1,4 @@
-module MelissaData
+module MelissaData::NativeObject
   class Name < Base
     def initialize(opts={})
       @obj = MdNameRubyWrapper::MdName.new

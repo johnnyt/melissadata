@@ -1,4 +1,4 @@
-module MelissaData
+module MelissaData::NativeObject
   class Email < Base
     def initialize(opts={})
       @obj = MdEmailRubyWrapper::MdEmail.new

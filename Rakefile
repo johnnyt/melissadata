@@ -27,8 +27,21 @@ if bundler_installed
   task :default => [:spec]
   task :test => [:spec]
 
-  desc "run spec tests"
+  desc "Run specs"
   RSpec::Core::RakeTask.new('spec') do |t|
+    t.rspec_opts = ['--backtrace', '--format', 'documentation']
     t.pattern = 'spec/**/*_spec.rb'
+  end
+
+  if RUBY_VERSION !~ /^1\.9/
+    namespace :spec do
+      desc "Run specs with RCov"
+      RSpec::Core::RakeTask.new('rcov') do |t|
+        t.pattern = 'spec/**/*_spec.rb'
+        t.rspec_opts = ['--backtrace', '--format', 'documentation']
+        t.rcov = true
+        # t.rcov_opts = ['--exclude', 'some/path']
+      end
+    end
   end
 end

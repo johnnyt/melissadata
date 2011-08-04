@@ -1,4 +1,4 @@
-module MelissaData
+module MelissaData::NativeObject
   class Base
     attr_reader :obj, :license, :input, :output, :result_codes, :results_string
     attr_writer :data_dir

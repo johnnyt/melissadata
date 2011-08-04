@@ -1,4 +1,4 @@
-module MelissaData
+module MelissaData::NativeObject
   class Geo < Base
     def initialize(opts={})
       @obj = MdGeoRubyWrapper::MdGeo.new

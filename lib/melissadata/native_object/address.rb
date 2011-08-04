@@ -1,4 +1,4 @@
-module MelissaData
+module MelissaData::NativeObject
   class Address < Base
     def initialize(opts={})
       @obj = MdAddrRubyWrapper::MdAddr.new

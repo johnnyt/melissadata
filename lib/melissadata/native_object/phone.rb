@@ -1,4 +1,4 @@
-module MelissaData
+module MelissaData::NativeObject
   class Phone < Base
     def initialize(opts={})
       @obj = MdPhoneRubyWrapper::MdPhone.new

@@ -1,4 +1,4 @@
-module MelissaData
+module MelissaData::NativeObject
   class IpLocator < Base
     def initialize(opts={})
       @obj = MdIpLocatorRubyWrapper::MdIpLocator.new
