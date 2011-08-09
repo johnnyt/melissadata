@@ -1,5 +1,9 @@
 Gemfile.lock
 
+.DS_Store
+
+chef/
+
 coverage/
 .bundle/
 doc/

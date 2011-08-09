@@ -11,7 +11,7 @@ module MelissaData
           @command = PackageCommand.new
         end
 
-        it "requires a MelissaData disc image" do
+        xit "requires a MelissaData disc image" do
           lambda {@command.execute}.should raise_error(MelissaData::Errors::DiscNotFound)
         end
 

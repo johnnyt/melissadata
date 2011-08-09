@@ -9,10 +9,11 @@ require 'active_support/core_ext'
 module MelissaData
   module_function
 
-  autoload :Env,        'melissadata/env'
-  autoload :CLI,        'melissadata/cli'
-  autoload :Errors,     'melissadata/errors'
-  autoload :Constants,  'melissadata/constants'
+  autoload :Env,            'melissadata/env'
+  autoload :CLI,            'melissadata/cli'
+  autoload :Errors,         'melissadata/errors'
+  autoload :Constants,      'melissadata/constants'
+  autoload :VagrantPlugin,  'melissadata/vagrant_plugin'
 
   ENVIRONMENTS = [:development, :production, :test, :staging]
 
