@@ -1,7 +1,7 @@
 module MelissaData
   module VagrantPlugin
-    # A configuration class to configure defaults which are used for
-    # the `vagrant-rake` plugin.
+
+    # A configuration class to configure defaults which are used for MelissaData::VagrantPlugin
     class Config < ::Vagrant::Config::Base
       configures :melissadata
       attr_accessor :target_path
@@ -15,5 +15,6 @@ module MelissaData
         errors.add(I18n.t("vagrant.plugins.melissadata.config_directory")) if target_path && !target_path.is_a?(String)
       end
     end
+
   end
 end
