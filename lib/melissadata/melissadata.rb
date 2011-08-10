@@ -13,6 +13,7 @@ module MelissaData
   autoload :CLI,            'melissadata/cli'
   autoload :Errors,         'melissadata/errors'
   autoload :Constants,      'melissadata/constants'
+  autoload :NativeObject,   'melissadata/native_object'
   autoload :VagrantPlugin,  'melissadata/vagrant_plugin'
 
   ENVIRONMENTS = [:development, :production, :test, :staging]

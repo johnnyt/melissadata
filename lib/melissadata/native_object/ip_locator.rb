@@ -1,3 +1,5 @@
+require '/opt/melissadata/lib/mdIpLocatorRubyWrapper'
+
 module MelissaData::NativeObject
   class IpLocator < Base
     def initialize(opts={})

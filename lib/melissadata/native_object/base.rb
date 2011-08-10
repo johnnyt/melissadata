@@ -73,7 +73,7 @@ module MelissaData::NativeObject
     end
 
     def data_dir
-      @data_dir ||= '/opt/melissa_data/data'
+      @data_dir ||= '/opt/melissadata/data'
     end
   end
 end

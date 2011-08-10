@@ -1,3 +1,5 @@
+require '/opt/melissadata/lib/mdNameRubyWrapper'
+
 module MelissaData::NativeObject
   class Name < Base
     def initialize(opts={})

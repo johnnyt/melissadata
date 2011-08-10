@@ -11,9 +11,3 @@ module MelissaData
     autoload :Phone,      'melissadata/native_object/phone'
   end
 end
-
-%w[
-  mdAddrRubyWrapper mdEmailRubyWrapper mdGeoRubyWrapper mdNameRubyWrapper mdPhoneRubyWrapper mdIpLocatorRubyWrapper
-].each do |obj|
-  require File.join('/opt/melissadata/lib', obj)
-end

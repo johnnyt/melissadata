@@ -1,3 +1,5 @@
+require '/opt/melissadata/lib/mdPhoneRubyWrapper'
+
 module MelissaData::NativeObject
   class Phone < Base
     def initialize(opts={})

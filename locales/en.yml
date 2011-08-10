@@ -9,4 +9,5 @@ en:
         installing: "Installing MelissaData into: %{path}"
         config_directory: "Directory must be a string."
         copying_file: "Copying %{file} to %{path}"
+        copying_directory: "Copying %{source} to %{target}"
         compiling: "Compiling new shared objects"

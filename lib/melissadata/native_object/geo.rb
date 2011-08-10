@@ -1,3 +1,5 @@
+require '/opt/melissadata/lib/mdGeoRubyWrapper'
+
 module MelissaData::NativeObject
   class Geo < Base
     def initialize(opts={})
