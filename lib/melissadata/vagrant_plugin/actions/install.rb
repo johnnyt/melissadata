@@ -25,6 +25,8 @@ module MelissaData
             end
 
             copy_dir MelissaData.gem_root.to_s, 'gem'
+            env.ui.info I18n.t("vagrant.plugins.melissadata.bundle_install"), :prefix => false
+            exec "cd #{target_root}/gem; bundle install"
 
             copy_file File.expand_path("templates/Makefile", MelissaData.gem_root), 'src'
 
@@ -32,19 +34,6 @@ module MelissaData
             sudo "cd #{target_root}/src && make #{source_paths_and_names.map{ |path,name| name }.join(' ')}"
 
             sudo "chown -R vagrant:vagrant #{target_root}"
-
-            # source_paths_and_names.each do |source_path,name|
-            #   data_file = "#{dest_dir}/#{obj}.tgz"
-            #   inside "#{source_dir}/#{obj}" do
-            #     run "tar czf #{data_file} data"
-            #   end
-
-            #   say_status :upload, "#{obj}.tgz to #{options[:bucket_name]}"
-            #   cf = CloudFiles::Connection.new(:username => options[:username], :api_key => options[:api_key])
-            #   cont = cf.container options[:bucket_name]
-            #   remote_object = cont.create_object "#{obj}.tgz", false
-            #   remote_object.load_from_filename data_file
-            # end
 
           else
             env.ui.error "Vagrant VM is not running", :prefix => false
@@ -54,6 +43,25 @@ module MelissaData
         end
 
         protected
+
+        def package_data
+          # source_paths_and_names.each do |source_path,name|
+          #   data_file = "#{dest_dir}/#{obj}.tgz"
+          #   inside "#{source_dir}/#{obj}" do
+          #     run "tar czf #{data_file} data"
+          #   end
+
+          #   say_status :upload, "#{obj}.tgz to #{options[:bucket_name]}"
+          #   cf = CloudFiles::Connection.new(:username => options[:username], :api_key => options[:api_key])
+          #   cont = cf.container options[:bucket_name]
+          #   remote_object = cont.create_object "#{obj}.tgz", false
+          #   remote_object.load_from_filename data_file
+          # end
+        end
+
+        def exec(command)
+          @vm.ssh.execute{ |ssh| ssh.exec! command }
+        end
 
         def sudo(command)
           @vm.ssh.execute{ |ssh| ssh.sudo! command }

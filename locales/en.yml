@@ -7,6 +7,7 @@ en:
     plugins:
       melissadata:
         installing: "Installing MelissaData into: %{path}"
+        bundle_install: "Installing bundled gems"
         config_directory: "Directory must be a string."
         copying_file: "Copying %{file} to %{path}"
         copying_directory: "Copying %{source} to %{target}"
