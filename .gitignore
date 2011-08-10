@@ -12,7 +12,6 @@ _site
 
 .yardoc
 .livereload
-.rvmrc
 
 *.swp
 *.watchr

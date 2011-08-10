@@ -1,5 +1,5 @@
 require File.expand_path('lib/melissadata/melissadata', File.dirname(__FILE__))
-# MelissaData::VagrantPlugin
+MelissaData::VagrantPlugin
 
 Vagrant::Config.run do |config|
   config.vm.box = 'melissadata'
