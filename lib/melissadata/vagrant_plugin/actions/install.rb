@@ -10,62 +10,23 @@ module MelissaData
         end
 
         def call(env)
-          if env["vm"].created? && env["vm"].vm.running?
-            source_dir = env['melissadata.source_root']
-            # raise MelissaData::Errors::DiscNotFound unless source_dir
+          @vm = env['vm']
+          if @vm.created? && @vm.vm.running?
+            target_root = env['config'].melissadata.target_path
+            env.ui.info I18n.t("vagrant.plugins.melissadata.installing", :path => target_root), :prefix => false
 
-            dest_dir = env['config'].melissadata.target_path
+            sudo "mkdir -p #{target_root}/lib #{target_root}/src && chown -R vagrant:vagrant #{target_root}"
 
-            env["vm"].ssh.execute do |ssh|
-              # env.ui.info I18n.t("vagrant.plugins.melissadata.installing", :path => working_directory), :prefix => false
-
-              ssh.exec!("sudo mkdir -p #{dest_dir}/lib && sudo chown -R vagrant:vagrant #{dest_dir}") do |channel, type, data|
-                # Print the data directly to STDOUT, not doing any newlines
-                # or any extra formatting of our own
-                $stdout.print(data) if type != :exit_status
-              end
-
-              # Puts out an ending newline just to make sure we end on a new
-              # line.
-              $stdout.puts
+            source_paths_and_names.each do |source_path,name|
+              Dir["#{source_path}/linux/gcc34_64bit/*.h"].each{ |filename| copy_file filename, 'src' }
+              copy_file "#{source_path}/linux/gcc34_64bit/libmd#{name}.so", 'lib'
+              copy_file "#{source_path}/linux/interfaces/ruby/md#{name}RubyWrapper.cpp", 'src'
             end
 
-            # objects.each do |name, dir|
-            #   # Dir["#{source_dir}/#{obj}/linux/gcc34_64bit/*.h"].each do |filename|
-            #   #   copy_file filename, "/opt/melissadata/src/#{File.basename(filename)}"
-            #   # end
+            copy_file File.expand_path("templates/Makefile", MelissaData.gem_root), 'src'
 
-            #   filename = "#{source_dir}/#{obj}/linux/gcc34_64bit/libmd#{obj.capitalize}.so"
-            #   env['vm'].ssh.upload!(StringIO.new(filename), File.join(env['config'].melissadata.directory, 'lib', File.basename(filename)))
-            #   # copy_file filename, "/opt/melissadata/lib/#{File.basename(filename)}"
-
-            #   # filename = "#{source_dir}/#{obj}/linux/interfaces/ruby/md#{obj.capitalize}RubyWrapper.cpp"
-            #   # copy_file filename, "/opt/melissadata/lib/#{File.basename(filename)}"
-            # end
-
-
-            # template "Makefile", "/opt/melissadata/src/Makefile"
-
-
-            # boxes = env.boxes.sort
-            # return env.ui.warn(I18n.t("vagrant.commands.box.no_installed_boxes"), :prefix => false) if boxes.empty?
-            # boxes.each { |b| env.ui.info(b.name, :prefix => false) }
-
-            # command = "rake #{env["rake.command"]}".strip
-
-            # env["vm"].ssh.execute do |ssh|
-            #   env.ui.info I18n.t("vagrant.plugins.melissadata.installing", :path => working_directory)
-
-            #   ssh.exec!("cd #{working_directory}; #{command}") do |channel, type, data|
-            #     # Print the data directly to STDOUT, not doing any newlines
-            #     # or any extra formatting of our own
-            #     $stdout.print(data) if type != :exit_status
-            #   end
-
-            #   # Puts out an ending newline just to make sure we end on a new
-            #   # line.
-            #   $stdout.puts
-            # end
+            env.ui.info I18n.t("vagrant.plugins.melissadata.compiling"), :prefix => false
+            sudo "cd #{target_root}/src && make"
           else
             env.ui.error "Vagrant VM is not running", :prefix => false
           end
@@ -75,14 +36,30 @@ module MelissaData
 
         protected
 
-        def objects
-          possible_objects = %w[ address email name phone ]
-          objects = Dir.entries(source_dir).select{ |path| possible_objects.include?(path) }
-          # objects = %w[ email name ]
+        def sudo(command)
+          @vm.ssh.execute{ |ssh| ssh.sudo! command }
         end
 
-        def working_directory
-          @env["rake.cwd"] || @env["config"].melissadata.target_path || @env["config"].vm.shared_folders["v-root"][:guestpath]
+        def copy_file(source_path, dest_subdir)
+          filename = File.basename(source_path)
+          dest_path = File.expand_path("#{dest_subdir}/#{filename}", @env['config'].melissadata.target_path)
+
+          @env.ui.info I18n.t("vagrant.plugins.melissadata.copying_file", :file => filename, :path => dest_path), :prefix => false
+
+          # sudo "rm -f #{dest_path}"
+          @vm.ssh.upload!(source_path, dest_path)
+          sudo "chmod u+w #{dest_path}"
+        end
+
+        def source_paths_and_names
+          # Examples:
+          # DQ-DVD-2011-05
+          # GEO-DVD-2011-Q2
+          @paths_and_names ||= Dir['/Volumes/*-DVD-*/**/md*Ref.pdf'].map do |path|
+            dir = File.dirname(path)
+            name = path.match(/md(.*)Ref\.pdf/).captures.first
+            [dir, name]
+          end
         end
       end
     end

@@ -1,6 +1,6 @@
 DIR=/opt/melissadata/lib
-RUBYDIR=/usr/local/rvm/rubies/ruby-1.8.7-p352/lib/ruby/1.8/x86_64-linux
-# RUBYDIR=/usr/lib/ruby/1.8/x86_64-linux
+# RUBYDIR=/usr/local/rvm/rubies/ruby-1.8.7-p352/lib/ruby/1.8/x86_64-linux
+RUBYDIR=/usr/lib/ruby/1.8/x86_64-linux
 CXX=g++
 LDLIBS=-L$(DIR) -Wl,-rpath,$(DIR)
 FLAGS=-g -O -Wall -pthread -m64
