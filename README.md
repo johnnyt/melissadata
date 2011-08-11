@@ -10,24 +10,25 @@ Ruby wrappers around the MelissaData objects. The code to access the raw
 shared objects is based on the sample code provided by the MelissaData
 DVDs / downloads.
 
+## Prereqs
+
+Make sure these are all installed on your development machine:
+
+* Oracle's VirtualBox: [VirtualBox](http://www.virtualbox.org)
+* RVM: [http://beginrescueend.com](http://beginrescueend.com)
+* Ruby 1.9.2 via RVM: `rvm install 1.9.2`
+* A MelissaData DVD or .dmg (e.g. IPL-DVD-2011-Q1 or DQ-DVD-2011-05)
+
 ## Quick Start
 
-First, make sure your development machine has [VirtualBox](http://www.virtualbox.org)
-installed. Then to get the Ruby environment set up, run:
+Once all the prereqs are installed, this should get you a running
+Vagrant VM:
 
     git clone git://github.com/johnnyt/melissadata.git
     cd melissadata
     rake setup
 
-Then make sure you have a lucid64 Vagrant base box on your machine:
-
-    bundle exec vagrant box add lucid64 http://files.vagrantup.com/lucid64.box
-
-Now fire up and provision the Vagrant VM:
-
-    bundle exec vagrant up
-
-Once that is done, make sure you have a MelissaData DVD (or .dmg) mounted, and run:
+Now make sure you have a MelissaData DVD (or .dmg) mounted (e.g. IPL-DVD-2011-Q1), and run:
 
     bundle exec vagrant md install
 

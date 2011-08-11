@@ -8,15 +8,29 @@ task :setup do
     sh "bundle install"
   end
 
-  # Dir['config/*.example'].each do |example_file|
-  #   config_file = example_file.gsub(/\.example/,'')
-  #   sh %Q!cp #{example_file} #{config_file}! unless File.exists?(config_file)
-  # end
+  unless %x[bundle exec vagrant box list] =~ /lucid64$/
+    sh "bundle exec vagrant box add lucid64 http://files.vagrantup.com/lucid64.box"
+  end
 
-  puts "Done!\n\n"
+  sh "bundle exec vagrant up"
+
+  puts <<-STR
+
+
+    Now make sure you have a MelissaData DVD (or .dmg) mounted (e.g. IPL-DVD-2011-Q1),
+    then run:
+
+      bundle exec vagrant md install
+
+  STR
 end
 
 if bundler_installed
+  desc "Install MelissaData onto the Vagrant VM"
+  task :install_md do
+    sh "bundle exec vagrant md install"
+  end
+
   require 'bundler'
   Bundler::GemHelper.install_tasks
 
