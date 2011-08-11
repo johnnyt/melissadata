@@ -20,7 +20,7 @@ task :setup do
     Now make sure you have a MelissaData DVD (or .dmg) mounted (e.g. IPL-DVD-2011-Q1),
     then run:
 
-      bundle exec vagrant md install
+      rake install_md
 
   STR
 end

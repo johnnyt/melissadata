@@ -30,7 +30,7 @@ Vagrant VM:
 
 Now make sure you have a MelissaData DVD (or .dmg) mounted (e.g. IPL-DVD-2011-Q1), and run:
 
-    bundle exec vagrant md install
+    rake install_md
 
 Then SSH into the Vagrant VM:
 
