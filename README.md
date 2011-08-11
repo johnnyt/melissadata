@@ -21,10 +21,7 @@ installed. Then to get the Ruby environment set up, run:
 
 Then make sure you have a lucid64 Vagrant base box on your machine:
 
-    bundle exec vagrant box add lucid32 http://files.vagrantup.com/lucid32.box
-or
     bundle exec vagrant box add lucid64 http://files.vagrantup.com/lucid64.box
-
 
 Now fire up and provision the Vagrant VM:
 
@@ -50,4 +47,6 @@ Inside the IRB session run:
 
 which should return:
 
-    => {:domain_name=>"google.com", :country_abbrev=>"US", :region=>"California", :zip=>"94043", :isp=>"Google Inc", :lat=>"37.386052", :country=>"United States", :city=>"Mountain View", :lng=>"-122.083851", :messages=>{:status=>["IP Address found in database"]}, :result_codes=>"IS01"}
+    => {:domain_name=>"google.com", :country_abbrev=>"US", :region=>"California", :zip=>"94043",
+        :isp=>"Google Inc", :lat=>"37.386052", :country=>"United States", :city=>"Mountain View",
+        :lng=>"-122.083851", :messages=>{:status=>["IP Address found in database"]}, :result_codes=>"IS01"}
