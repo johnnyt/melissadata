@@ -1,3 +1,4 @@
+require 'active_support/core_ext'
 module MelissaData::NativeObject
   class Base
     attr_reader :obj, :license, :input, :output, :result_codes, :results_string
@@ -73,7 +74,7 @@ module MelissaData::NativeObject
     end
 
     def data_dir
-      @data_dir ||= '/opt/melissa_data/data'
+      @data_dir ||= '/opt/melissadata/data'
     end
   end
 end

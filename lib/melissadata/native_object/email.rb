@@ -1,3 +1,5 @@
+require '/opt/melissadata/lib/mdEmailRubyWrapper'
+
 module MelissaData::NativeObject
   class Email < Base
     def initialize(opts={})

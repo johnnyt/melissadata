@@ -1,5 +1,7 @@
 Gemfile.lock
 
+.DS_Store
+
 coverage/
 .bundle/
 doc/
@@ -8,7 +10,6 @@ _site
 
 .yardoc
 .livereload
-.rvmrc
 
 *.swp
 *.watchr

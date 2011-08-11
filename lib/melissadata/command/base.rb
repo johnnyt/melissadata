@@ -1,4 +1,3 @@
-
 module MelissaData
   module Command
     # A {Base} is the superclass for all commands which are single

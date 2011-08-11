@@ -1,0 +1,14 @@
+en:
+  melissadata:
+    errors:
+      disc_not_found: "Can't find MelissaData DVD in /Volumes"
+
+  vagrant:
+    plugins:
+      melissadata:
+        installing: "Installing MelissaData into: %{path}"
+        bundle_install: "Installing bundled gems"
+        config_directory: "Directory must be a string."
+        copying_file: "Copying %{file} to %{path}"
+        copying_directory: "Copying %{source} to %{target}"
+        compiling: "Compiling new shared objects"
