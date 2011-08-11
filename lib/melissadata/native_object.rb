@@ -1,4 +1,5 @@
 module MelissaData
+
   module NativeObject
     autoload :Base,       'melissadata/native_object/base'
     autoload :Client,     'melissadata/native_object/client'
@@ -10,4 +11,5 @@ module MelissaData
     autoload :Name,       'melissadata/native_object/name'
     autoload :Phone,      'melissadata/native_object/phone'
   end
+
 end

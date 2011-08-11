@@ -1,0 +1,7 @@
+maintainer        "JohnnyT"
+maintainer_email  "johnnyt@xan.do"
+license           "Apache 2.0"
+description       "Preps box for MelissaData"
+depends           "apt"
+depends           "build-essential"
+depends           "ubuntu"

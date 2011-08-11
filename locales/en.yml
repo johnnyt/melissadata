@@ -12,3 +12,4 @@ en:
         copying_file: "Copying %{file} to %{path}"
         copying_directory: "Copying %{source} to %{target}"
         compiling: "Compiling new shared objects"
+        file_exists: "The remote file already exists: %{filename}"

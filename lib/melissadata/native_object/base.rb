@@ -1,13 +1,11 @@
 require 'active_support/core_ext'
 module MelissaData::NativeObject
   class Base
-    attr_reader :obj, :license, :input, :output, :result_codes, :results_string
+    attr_reader :obj, :input, :output, :result_codes, :results_string
     attr_writer :data_dir
 
     def initialize(opts={})
-      @license  = opts[:license]  || "DEMO"
-
-      unless obj.SetLicenseString(@license)
+      unless obj.SetLicenseString(license)
         @license = "DEMO"
         puts "Invalid License: Running in DEMO MODE."
       end
@@ -36,6 +34,20 @@ module MelissaData::NativeObject
         val.strip! if val.respond_to?(:strip)
         hsh[pair.first] = val if val.present?
         hsh
+      end
+    end
+
+    def license
+      @license ||= begin
+        default_filename = '/opt/melissadata/license.txt'
+
+        if File.exists?(default_filename)
+          File.read(default_filename).chomp
+        elsif (env_license = ENV['MELISSADATA_LICENSE'])
+          env_license
+        else
+          'DEMO'
+        end
       end
     end
 

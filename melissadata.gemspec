@@ -15,21 +15,6 @@ Gem::Specification.new do |s|
   s.files = Dir["**/*"].map{ |f| f.to_s }
   s.executables   = Dir['bin/*'].map{ |f| File.basename(f) }
 
-  s.add_development_dependency 'rake', '0.8.7'
-  s.add_development_dependency 'rspec', '>2.4'
-  # s.add_development_dependency 'rb-fsevent'
-  s.add_development_dependency 'growl'
-  s.add_development_dependency 'guard-rspec'
-  # s.add_development_dependency 'vagrant', '0.8.3.dev'
-
-  if RUBY_VERSION =~ /1\.9/
-    s.add_development_dependency 'ruby-debug19'
-    s.add_development_dependency 'simplecov', '>= 0.4.0'#, :require => false, :group => :test
-  else
-    s.add_development_dependency 'ruby-debug'
-    s.add_development_dependency 'rcov'
-  end
-
   s.add_dependency 'i18n'
   s.add_dependency 'thor'
   s.add_dependency 'activesupport'
@@ -38,4 +23,17 @@ Gem::Specification.new do |s|
   s.add_dependency 'awesome_print'
   s.add_dependency 'yajl-ruby'
   s.add_dependency 'cloudfiles'
+
+  s.add_development_dependency 'rake'
+  s.add_development_dependency 'rspec', '>2.4'
+  s.add_development_dependency 'growl'
+  s.add_development_dependency 'guard-rspec'
+
+  if RUBY_VERSION =~ /1\.9/
+    s.add_development_dependency 'ruby-debug19'
+    s.add_development_dependency 'simplecov', '>= 0.4.0'
+  else
+    s.add_development_dependency 'ruby-debug'
+    s.add_development_dependency 'rcov'
+  end
 end
