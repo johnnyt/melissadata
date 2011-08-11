@@ -5,9 +5,7 @@ task :setup do
   sh %Q!gem install bundler --no-ri --no-rdoc! unless bundler_installed
   output = `bundle check 2>&1`
   unless $?.to_i == 0
-    # puts output
     sh "bundle install"
-    # puts
   end
 
   # Dir['config/*.example'].each do |example_file|

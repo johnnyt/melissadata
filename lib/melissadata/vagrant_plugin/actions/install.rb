@@ -2,7 +2,8 @@ module MelissaData
   module VagrantPlugin
     module Actions
 
-      # A Vagrant middleware which installs the gem on the VM
+      # A Vagrant middleware which copies files from MelissaData DVDs to the VM
+      # and then compiles the shared objects
       class Install
         def initialize(app, env)
           @app = app
@@ -15,6 +16,8 @@ module MelissaData
             target_root = env['config'].melissadata.target_path
             env.ui.info I18n.t("vagrant.plugins.melissadata.installing", :path => target_root), :prefix => false
 
+            copy_dir MelissaData.gem_root.to_s, 'gem'
+
             sudo "mkdir -p #{target_root}/lib #{target_root}/data #{target_root}/src && chown -R vagrant:vagrant #{target_root}"
 
             source_paths_and_names.each do |source_path,name|
@@ -23,10 +26,6 @@ module MelissaData
               copy_file "#{source_path}/linux/interfaces/ruby/md#{name}RubyWrapper.cpp", 'src'
               copy_dir "#{source_path}/data"
             end
-
-            copy_dir MelissaData.gem_root.to_s, 'gem'
-            env.ui.info I18n.t("vagrant.plugins.melissadata.bundle_install"), :prefix => false
-            exec "cd #{target_root}/gem; bundle install"
 
             copy_file File.expand_path("templates/Makefile", MelissaData.gem_root), 'src'
 
