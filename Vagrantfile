@@ -2,7 +2,7 @@ require File.expand_path('lib/melissadata', File.dirname(__FILE__))
 MelissaData::VagrantPlugin.load!
 
 Vagrant::Config.run do |config|
-  config.vm.box = 'lucid64-raw'
+  config.vm.box = 'lucid64'
   # config.vm.forward_port 'http', 80, 8888
   # config.vm.forward_port 'melissa_data', 23456, 23457
 

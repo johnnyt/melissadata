@@ -16,9 +16,6 @@ module MelissaData
             target_root = env['config'].melissadata.target_path
             env.ui.info I18n.t("vagrant.plugins.melissadata.installing", :path => target_root), :prefix => false
 
-            # sudo "mkdir -p #{target_root}/lib #{target_root}/data #{target_root}/src && chown -R vagrant:vagrant #{target_root}"
-            sudo "chown -R vagrant:vagrant #{target_root}"
-
             copy_dir MelissaData.gem_root.to_s, 'gem'
 
             source_paths_and_names.each do |source_path,name|
@@ -27,9 +24,6 @@ module MelissaData
               copy_file "#{source_path}/linux/interfaces/ruby/md#{name}RubyWrapper.cpp", 'src'
               copy_dir "#{source_path}/data"
             end
-
-
-            # copy_file File.expand_path("templates/Makefile", MelissaData.gem_root), 'src'
 
             env.ui.info I18n.t("vagrant.plugins.melissadata.compiling"), :prefix => false
             exec "cd #{target_root}/src && make #{source_paths_and_names.map{ |path,name| name }.join(' ')}"
