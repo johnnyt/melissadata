@@ -16,6 +16,11 @@ module MelissaData
             target_root = env['config'].melissadata.target_path
             env.ui.info I18n.t("vagrant.plugins.melissadata.installing", :path => target_root), :prefix => false
 
+            sudo "chown -R vagrant:vagrant #{target_root}"
+
+            license = env.ui.ask "Enter your MelissaData license: "
+            @vm.ssh.upload!(StringIO.new("#{license}\n"), '/opt/melissadata/license.txt')
+
             copy_dir MelissaData.gem_root.to_s, 'gem'
 
             source_paths_and_names.each do |source_path,name|
@@ -54,6 +59,12 @@ module MelissaData
           # end
         end
 
+        def test?(command)
+          @vm.ssh.execute do |ssh|
+            return ssh.test?(command)
+          end
+        end
+
         def exec(command)
           @vm.ssh.execute{ |ssh| ssh.exec! command }
         end
@@ -75,10 +86,15 @@ module MelissaData
           filename = File.basename(source_path)
           dest_path = File.expand_path("#{dest_subdir}/#{filename}", @env['config'].melissadata.target_path)
 
-          @env.ui.info I18n.t("vagrant.plugins.melissadata.copying_file", :file => filename, :path => dest_path), :prefix => false
+          if test? "[ -e #{dest_path} ]"
+            # file exists
+            # sudo "rm -f #{dest_path}"
+            @env.ui.info I18n.t("vagrant.plugins.melissadata.file_exists", :filename => dest_path), :prefix => false
+          else
+            @env.ui.info I18n.t("vagrant.plugins.melissadata.copying_file", :file => filename, :path => dest_path), :prefix => false
+            @vm.ssh.upload!(source_path, dest_path)
+          end
 
-          # sudo "rm -f #{dest_path}"
-          @vm.ssh.upload!(source_path, dest_path)
           sudo "chmod u+w #{dest_path}"
         end
 

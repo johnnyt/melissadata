@@ -20,15 +20,24 @@ task :setup do
     Now make sure you have a MelissaData DVD (or .dmg) mounted (e.g. IPL-DVD-2011-Q1),
     then run:
 
-      rake install_md
+      rake md:install
 
   STR
 end
 
 if bundler_installed
-  desc "Install MelissaData onto the Vagrant VM"
-  task :install_md do
-    sh "bundle exec vagrant md install"
+  task :console => 'md:console'
+
+  namespace :md do
+    desc "Open a MelissaData console (IRB session)"
+    task :console do
+      sh "bundle exec irb -r./lib/md"
+    end
+
+    desc "Install MelissaData onto the Vagrant VM"
+    task :install do
+      sh "bundle exec vagrant md install"
+    end
   end
 
   require 'bundler'
