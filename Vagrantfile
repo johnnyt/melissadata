@@ -3,14 +3,13 @@ MelissaData::VagrantPlugin.load!
 
 Vagrant::Config.run do |config|
   config.vm.box = 'lucid64'
-  config.vm.box = 'vagrant'
   config.vm.provision :chef_solo do |chef|
     chef.cookbooks_path = ['chef/cookbooks']
     chef.add_recipe 'melissadata'
   end
 
+  config.vm.forward_port 'melissadata', 1404, 14004
   # config.vm.forward_port 'http', 80, 8888
-  # config.vm.forward_port 'melissa_data', 23456, 23457
 
   # config.melissadata.target_path = '/opt/melissadata'
 

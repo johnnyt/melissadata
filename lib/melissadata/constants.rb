@@ -5,7 +5,7 @@ module MelissaData
     DEFAULT_ADDRESS = '0.0.0.0'
 
     # Default execution port
-    DEFAULT_PORT    = 6000
+    DEFAULT_PORT    = 1404
   end
 end
 
