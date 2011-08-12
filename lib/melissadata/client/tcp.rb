@@ -18,16 +18,10 @@ module MelissaData::Client
       end
     end
 
-    def initialize
-      @rpc = MessagePack::RPC::Client.new(host, port)
-    end
-
-    def host
-      self.class.host
-    end
-
-    def port
-      self.class.port
+    def initialize(host=self.class.host, port=self.class.port)
+      @host = host
+      @port = port
+      @rpc = MessagePack::RPC::Client.new(@host, @port)
     end
   end
 

@@ -10,7 +10,7 @@ module MelissaData::VagrantPlugin::Actions
         sudo "gem uninstall melissadata" if test? %Q!ruby -e 'require "rubygems"; require "melissadata"'! #"ruby -r md -e 'puts MD::VERSION'"
         gem_filename = "melissadata-#{MelissaData::VERSION}.gem"
         copy_file "#{File.expand_path("pkg/#{gem_filename}", MelissaData.gem_root)}"
-        sudo "gem install #{target_root}/#{gem_filename} && rm #{target_root}/#{gem_filename}"
+        sudo "gem install #{target_root}/#{gem_filename}"# && rm #{target_root}/#{gem_filename}"
 
         # sudo "/etc/init.d/md_rpc_server start"
       else
