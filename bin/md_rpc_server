@@ -1,0 +1,29 @@
+#!/usr/bin/env ruby
+require File.expand_path('../lib/melissadata/melissadata', File.dirname(__FILE__))
+
+handler = MelissaData::RPC::Server.new
+
+host = MelissaData::DEFAULT_ADDRESS
+port = MelissaData::DEFAULT_PORT
+
+svr = MessagePack::RPC::Server.new
+svr.listen(host, port, handler)
+puts "== RPC listening on #{host}:#{port}"
+svr.run
+
+
+# license = ARGV.first || 'INVALID LICENSE'
+# require 'melissa-data/rpc'
+# require 'melissa-data/shared_objects'
+# require 'msgpack/rpc/transport/unix'
+
+# host = MelissaData::RPC::DEFAULT_ADDRESS
+# port = 23456 # MelissaData::RPC::DEFAULT_PORT
+# address = "/tmp/melissa-data"
+# listener = MessagePack::RPC::UNIXServerTransport.new(address)
+# api = MelissaData::SharedObjects::Client.new(license)
+
+# svr = MessagePack::RPC::Server.new
+# svr.listen(listener, api)
+# puts "== RPC listening on #{host}:#{port}"
+# svr.run

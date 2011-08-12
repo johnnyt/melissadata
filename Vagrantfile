@@ -8,8 +8,8 @@ Vagrant::Config.run do |config|
     chef.add_recipe 'melissadata'
   end
 
+  config.vm.forward_port 'melissadata', 1404, 14004
   # config.vm.forward_port 'http', 80, 8888
-  # config.vm.forward_port 'melissa_data', 23456, 23457
 
   # config.vm.customize do |vm|
   #   vm.memory_size = 1024
