@@ -1,10 +1,9 @@
-require 'vagrant_plugin/actions/install'
+module MelissaData::VagrantPlugin
 
-module MelissaData
-  module VagrantPlugin
-
-    module Actions
-    end
-
+  module Actions
+    autoload :Base,       'vagrant_plugin/actions/base'
+    autoload :Install,    'vagrant_plugin/actions/install'
+    autoload :Update,     'vagrant_plugin/actions/update'
   end
+
 end

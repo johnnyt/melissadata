@@ -14,6 +14,10 @@ module MelissaData
       Vagrant::Action.register(:md_install, Vagrant::Action::Builder.new do
         use Actions::Install
       end)
+
+      Vagrant::Action.register(:md_update, Vagrant::Action::Builder.new do
+        use Actions::Update
+      end)
     end
   end
 end

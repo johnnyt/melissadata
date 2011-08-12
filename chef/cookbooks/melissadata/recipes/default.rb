@@ -19,14 +19,17 @@ template "/opt/melissadata/src/Makefile" do
   group   'vagrant'
 end
 
-template "md_rpc_server.init" do
-  path "/etc/init.d/md_rpc_server"
-  owner "root"
-  group "root"
-  mode "0755"
-  action :create_if_missing
+%w[ tcp unix ].each do |transport|
+  template "md_#{transport}_server.init" do
+    path "/etc/init.d/md_#{transport}_server"
+    owner "root"
+    group "root"
+    mode "0755"
+    action :create_if_missing
+  end
+
+  service "md_#{transport}_server" do
+    action :enable
+  end
 end
 
-service "md_rpc_server" do
-  action :enable
-end

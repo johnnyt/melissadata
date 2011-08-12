@@ -1,12 +1,13 @@
 module MelissaData
-  # Constants used by the system to access data.
-  module Constants
-    # Default execution address
-    DEFAULT_ADDRESS = '0.0.0.0'
 
-    # Default execution port
-    DEFAULT_PORT    = 1404
+  module Constants
+    DEFAULT_TCP_ADDRESS = '0.0.0.0'
+    DEFAULT_TCP_PORT    = 1404
+    DEFAULT_SOCKET_FILE = '/tmp/melissadata.sock'
+
+    DEFAULT_VAGRANT_TCP_PORT = 14004
   end
+
 end
 
 module MelissaData

@@ -1,21 +1,21 @@
 #! /bin/sh
 
 ### BEGIN INIT INFO
-# Provides:          md_rpc_server
+# Provides:          md_unix_server
 # Required-Start:    $all
 # Required-Stop:     $all
 # Default-Start:     2 3 4 5
 # Default-Stop:      0 1 6
-# Short-Description: Starts the MelissaData RPC server
-# Description:       Starts the MelissaData RPC server
+# Short-Description: Starts the MelissaData UnixSocket server
+# Description:       Starts the MelissaData UnixSocket server
 ### END INIT INFO
 
-NAME=md_rpc_server
+NAME=md_unix_server
 SCRIPTNAME=/etc/init.d/$NAME
-DAEMON=<%= node[:melissadata][:paths][:rpc_server_bin] %>
-PID_FILE=<%= node[:melissadata][:paths][:pid_file] %>
-CONFIG_FILE=<%= node[:melissadata][:paths][:config_file] %>
-ARGS="-c $CONFIG_FILE"
+DAEMON=/usr/bin/$NAME
+PID_FILE=/var/run/$NAME.pid
+RUNASUSER=<%= node[:melissadata][:runner_user] %>
+ARGS=""
 
 # Define LSB log_* functions.
 # Depend on lsb-base (>= 3.0-6) to ensure that this file is present.
@@ -23,7 +23,10 @@ ARGS="-c $CONFIG_FILE"
 
 # Function that starts the daemon/service
 do_start() {
-  start-stop-daemon --start --pidfile $PID_FILE --background --make-pidfile \
+  start-stop-daemon \
+    --start --background \
+    --make-pidfile --pidfile $PID_FILE \
+    --chuid $RUNASUSER \
     --exec $DAEMON -- $ARGS || true
 }
 

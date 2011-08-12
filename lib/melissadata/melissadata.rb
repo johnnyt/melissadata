@@ -5,7 +5,6 @@ require 'i18n'
 require 'thor'
 require 'thor/group'
 require 'thor/actions'
-# require 'active_support/core_ext'
 
 module MelissaData
   module_function
@@ -16,8 +15,23 @@ module MelissaData
   autoload :Constants,      'melissadata/constants'
   autoload :NativeObject,   'melissadata/native_object'
   autoload :VagrantPlugin,  'melissadata/vagrant_plugin'
-  autoload :RPC,            'melissadata/rpc'
+  autoload :Server,         'melissadata/server'
   autoload :Client,         'melissadata/client'
+
+  def client
+    if MelissaData::Client::Unix.available?
+      MelissaData::Client::Unix.new
+
+    elsif MelissaData::Client::TCP.available?
+      MelissaData::Client::TCP.new
+
+    elsif MelissaData::Client::Vagrant.available?
+      MelissaData::Client::Vagrant.new
+
+    else
+      raise 'No client connection available'
+    end
+  end
 
   ENVIRONMENTS = [:development, :production, :test, :staging]
 

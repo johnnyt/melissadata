@@ -1,31 +1,21 @@
-module MelissaData
-  module VagrantPlugin
+module MelissaData::VagrantPlugin
 
-    class Command < ::Vagrant::Command::GroupBase
-      register "md", "MelissaData stuff"
-      # Examples:
-      # DQ-DVD-2011-05
-      # GEO-DVD-2011-Q2
+  class Command < ::Vagrant::Command::GroupBase
+    register "md", "MelissaData vagrant commands"
 
-      # source_root Dir['/Volumes/*'].detect{ |path| path =~ /DVD-\d{4}-.\d$/ }
-      # def self.source_root
-      #   @source_root ||= Dir['/Volumes/*'].detect{ |path| path =~ /DVD-\d{4}-.\d$/ }
-      # end
-
-      desc "install", "Install MelissaData gem on the vagrant box"
-      def install
-        target_vms.each do |vm|
-          vm.env.actions.run(:md_install, 'melissadata.source_path' => 'foo')
-        end
+    desc "install", "Install MelissaData gem on the vagrant box"
+    def install
+      target_vms.each do |vm|
+        vm.env.actions.run(:md_install)
       end
-
-      # protected
-
-      # def execute_on_vm(vm)
-      #   # vm.env.actions.run(:melissadata, 'melissadata.source_root' => self.class.source_root)
-      #   vm.env.actions.run(:melissadata, 'melissadata.source_path' => 'foo')
-      # end
     end
 
+    desc "update", "Update the MelissaData gem on the vagrant box"
+    def update
+      target_vms.each do |vm|
+        vm.env.actions.run(:md_update)
+      end
+    end
   end
+
 end

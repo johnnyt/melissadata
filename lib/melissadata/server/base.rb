@@ -1,9 +1,16 @@
-# require 'msgpack/rpc'
-# require 'msgpack/rpc/transport/unix'
+module MelissaData::Server
 
-module MelissaData::RPC
+  class Base
+    attr_reader :server
 
-  class Server
+    def initialize
+      @server = MessagePack::RPC::Server.new
+    end
+
+    def run
+      raise 'I should have been overridden'
+    end
+
     def process_ip(ip=nil)
       ip ||= ''
       output = {}

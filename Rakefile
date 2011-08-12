@@ -44,6 +44,12 @@ if bundler_installed
       sh "bundle exec rake build"
       sh "bundle exec vagrant md install"
     end
+
+    desc "Update the MelissaData gem on the Vagrant VM"
+    task :update do
+      sh "bundle exec rake build"
+      sh "bundle exec vagrant md update"
+    end
   end
 
   require 'bundler'

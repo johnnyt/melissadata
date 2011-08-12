@@ -1,0 +1,5 @@
+#!/usr/bin/env ruby
+require File.expand_path('../lib/melissadata/melissadata', File.dirname(__FILE__))
+
+svr = MelissaData::Server::TCP.new
+svr.run
