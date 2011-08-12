@@ -10,7 +10,7 @@ module MelissaData::VagrantPlugin::Actions
         env.ui.info I18n.t("vagrant.plugins.melissadata.installing", :path => target_root), :prefix => false
 
         sudo "mkdir -p #{%w[ src lib data ].map{ |sub| "#{target_root}/#{sub}" }.join(' ')}"
-        sudo "chown -R vagrant:vagrant #{target_root}" #if test? "[ -e #{target_root} ]"
+        sudo "chown -R vagrant:vagrant #{target_root}"
 
         license_path = '/opt/melissadata/license.txt'
         unless test? "[ -e #{license_path} ]"
