@@ -35,10 +35,7 @@ module MelissaData
                 Dir["#{source_path}/linux/gcc34_64bit/*.h"].each{ |filename| copy_file filename, 'src' }
                 copy_file "#{source_path}/linux/gcc34_64bit/libmd#{name}.so", 'lib'
                 copy_file "#{source_path}/linux/interfaces/ruby/md#{name}RubyWrapper.cpp", 'src'
-
                 Dir["#{source_path}/data/*"].each{ |filename| copy_file filename, 'data' }
-
-                # copy_dir "#{source_path}/data", '.'#, :overwrite => true
               end
 
               env.ui.info I18n.t("vagrant.plugins.melissadata.compiling"), :prefix => false
@@ -46,6 +43,7 @@ module MelissaData
             end
 
             sudo "chown -R vagrant:vagrant #{target_root}"
+            sudo "/etc/init.d/md_rpc_server start"
 
           else
             env.ui.error "Vagrant VM is not running", :prefix => false

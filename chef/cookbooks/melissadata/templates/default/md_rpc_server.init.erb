@@ -23,12 +23,13 @@ ARGS="-c $CONFIG_FILE"
 
 # Function that starts the daemon/service
 do_start() {
-  start-stop-daemon --start --pidfile $PID_FILE --exec $DAEMON -- $ARGS || true
+  start-stop-daemon --start --pidfile $PID_FILE --background --make-pidfile \
+    --exec $DAEMON -- $ARGS || true
 }
 
 # Function that stops the daemon/service
 do_stop() {
-  start-stop-daemon --stop --pidfile $PIDFILE
+  start-stop-daemon --stop --pidfile $PID_FILE
 }
 
 case "$1" in

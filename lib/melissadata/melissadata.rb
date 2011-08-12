@@ -16,6 +16,8 @@ module MelissaData
   autoload :Constants,      'melissadata/constants'
   autoload :NativeObject,   'melissadata/native_object'
   autoload :VagrantPlugin,  'melissadata/vagrant_plugin'
+  autoload :RPC,            'melissadata/rpc'
+  autoload :Client,         'melissadata/client'
 
   ENVIRONMENTS = [:development, :production, :test, :staging]
 
@@ -78,5 +80,6 @@ end
 
 I18n.load_path << File.expand_path("locales/en.yml", MelissaData.gem_root)
 
+require 'melissadata/constants'
 require 'melissadata/command'
 require 'melissadata/version'
