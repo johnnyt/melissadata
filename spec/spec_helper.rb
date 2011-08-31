@@ -12,6 +12,7 @@ Bundler.setup
 # # Add this folder to the load path for "spec_helper"
 # $:.unshift(File.dirname(__FILE__))
 
+require 'active_support/core_ext'
 require 'vagrant/test_helpers'
 require 'melissadata'
 

@@ -25,11 +25,19 @@ module MelissaData::VagrantPlugin::Actions
 
         unless source_paths_and_names.empty?
           source_paths_and_names.each do |source_path,name|
-            Dir["#{source_path}/linux/gcc34_64bit/*.h"].each{ |filename| copy_file filename, 'src' }
+            Dir["#{source_path}/linux/gcc34_64bit/*.h"].each do |filename|
+              sudo "rm -f #{target_root}/src/#{File.basename(filename)}"
+              copy_file filename, 'src'
+            end
+            sudo "rm -f #{target_root}/lib/libmd#{name}.so"
             copy_file "#{source_path}/linux/gcc34_64bit/libmd#{name}.so", 'lib'
+            sudo "rm -f #{target_root}/src/md#{name}RubyWrapper.cpp"
             copy_file "#{source_path}/linux/interfaces/ruby/md#{name}RubyWrapper.cpp", 'src'
-            # Dir["#{source_path}/data/*"].each{ |filename| copy_file filename, 'data' }
-            Dir["#{source_path}/data/*"].each{ |filename| copy_dir filename, 'data' }
+
+            Dir["#{source_path}/data/*"].each do |filename|
+              sudo "rm -rf #{target_root}/data/#{File.basename(filename)}"
+              copy_dir filename, 'data'
+            end
           end
 
           env.ui.info I18n.t("vagrant.plugins.melissadata.compiling"), :prefix => false

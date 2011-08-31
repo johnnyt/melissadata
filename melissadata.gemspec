@@ -28,6 +28,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'rspec', '>2.4'
   s.add_development_dependency 'growl'
   s.add_development_dependency 'guard-rspec'
+  s.add_development_dependency 'pry'
 
   if RUBY_VERSION =~ /1\.9/
     s.add_development_dependency 'ruby-debug19'
