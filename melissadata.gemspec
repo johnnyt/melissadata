@@ -15,12 +15,12 @@ Gem::Specification.new do |s|
   s.files = Dir["**/*"].map{ |f| f.to_s }
   s.executables = %w[ md_unix_server md_tcp_server ]
 
+  s.add_dependency 'i18n'
   s.add_dependency 'thor'
   s.add_dependency 'activesupport'
   s.add_dependency 'msgpack-rpc'
   s.add_dependency 'cloudfiles'
 
-  s.add_development_dependency 'i18n'
   s.add_development_dependency 'multi_json'
   s.add_development_dependency 'awesome_print'
   s.add_development_dependency 'yajl-ruby'
