@@ -12,17 +12,17 @@ task :setup do
     sh "bundle exec vagrant box add lucid64 http://files.vagrantup.com/lucid64.box"
   end
 
-  sh "bundle exec vagrant up"
+  # sh "bundle exec vagrant up"
 
-  puts <<-STR
+  # puts <<-STR
 
 
-    Now make sure you have a MelissaData DVD (or .dmg) mounted (e.g. IPL-DVD-2011-Q1),
-    then run:
+  #   Now make sure you have a MelissaData DVD (or .dmg) mounted (e.g. IPL-DVD-2011-Q1),
+  #   then run:
 
-      rake md:install
+  #     rake md:install
 
-  STR
+  # STR
 end
 
 if bundler_installed

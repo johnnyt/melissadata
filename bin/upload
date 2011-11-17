@@ -1,0 +1,42 @@
+#!/usr/bin/env ruby
+
+require File.expand_path('../lib/melissadata/melissadata', File.dirname(__FILE__))
+require 'commander/import'
+
+program :version, MelissaData::VERSION
+program :description, 'Upload new MelissaData lib and data files to remote servers'
+
+command :data do |c|
+  c.syntax = 'update data [options]'
+  c.summary = ''
+  c.description = ''
+  c.example 'description', 'command example'
+
+  c.action do |args, options|
+    source_paths_and_names = Dir['/Volumes/*-DVD-*/**/md*Ref.pdf'].map do |path|
+      dir = File.dirname(path)
+      name = path.match(/md(.*)Ref\.pdf/).captures.first
+      [dir, name]
+    end
+
+    username    = ask("CloudFiles username:  ")
+    api_key     = ask("CloudFiles api_key:   ") { |q| q.echo = "*" }
+    bucket_name = ask("CloudFiles bucket:    ")
+
+    source_paths_and_names.reverse.each do |source_path,name|
+      data_file = "./#{name}.tgz"
+      filename = File.basename(data_file)
+
+      FileUtils.chdir source_path do
+        puts "Creating #{filename}"
+        `tar czf #{data_file} data`
+      end
+
+      cf = CloudFiles::Connection.new(:username => username, :api_key => api_key)
+      cont = cf.container bucket_name
+      remote_object = cont.create_object "#{filename}", false
+      puts "Uploading #{filename}"
+      remote_object.load_from_filename data_file
+    end
+  end
+end

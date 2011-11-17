@@ -16,6 +16,13 @@ module MelissaData::VagrantPlugin
         vm.env.actions.run(:md_update)
       end
     end
+
+    desc "upload", "Upload the new data files to CloudFiles"
+    def upload
+      target_vms.each do |vm|
+        vm.env.actions.run(:md_upload)
+      end
+    end
   end
 
 end

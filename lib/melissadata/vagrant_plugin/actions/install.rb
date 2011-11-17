@@ -53,34 +53,6 @@ module MelissaData::VagrantPlugin::Actions
 
       @app.call(env)
     end
-
-    protected
-
-    def source_paths_and_names
-      # Examples:
-      # DQ-DVD-2011-05
-      # GEO-DVD-2011-Q2
-      @paths_and_names ||= Dir['/Volumes/*-DVD-*/**/md*Ref.pdf'].map do |path|
-        dir = File.dirname(path)
-        name = path.match(/md(.*)Ref\.pdf/).captures.first
-        [dir, name]
-      end
-    end
-
-    def package_data
-      # source_paths_and_names.each do |source_path,name|
-      #   data_file = "#{dest_dir}/#{obj}.tgz"
-      #   inside "#{source_dir}/#{obj}" do
-      #     run "tar czf #{data_file} data"
-      #   end
-
-      #   say_status :upload, "#{obj}.tgz to #{options[:bucket_name]}"
-      #   cf = CloudFiles::Connection.new(:username => options[:username], :api_key => options[:api_key])
-      #   cont = cf.container options[:bucket_name]
-      #   remote_object = cont.create_object "#{obj}.tgz", false
-      #   remote_object.load_from_filename data_file
-      # end
-    end
   end
 
 end

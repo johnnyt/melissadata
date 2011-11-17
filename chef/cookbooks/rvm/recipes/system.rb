@@ -1,3 +1,5 @@
+package 'curl'
+
 bash "Download and run rvm-install-system-wide" do
   code "bash < <(curl -s https://rvm.beginrescueend.com/install/rvm)"
   not_if "[ -e /usr/local/rvm ]"
@@ -10,15 +12,15 @@ end
 #   end
 # end
 
-bash "Install RVM Readline package" do
-  code "/usr/local/rvm/bin/rvm pkg install readline"
-  not_if "[ -e $rvm_path/usr/lib/libreadline.so ]"
-end
+# bash "Install RVM Readline package" do
+#   code "/usr/local/rvm/bin/rvm pkg install readline"
+#   not_if "[ -e $rvm_path/usr/lib/libreadline.so ]"
+# end
 
-bash "Install RVM zlib package" do
-  code "/usr/local/rvm/bin/rvm pkg install zlib"
-  not_if "[ -e $rvm_path/usr/lib/libz.so ]"
-end
+# bash "Install RVM zlib package" do
+#   code "/usr/local/rvm/bin/rvm pkg install zlib"
+#   not_if "[ -e $rvm_path/usr/lib/libz.so ]"
+# end
 
 (node[:accounts] || 'vagrant').each do |username, options|
   group 'rvm' do

@@ -5,6 +5,7 @@ require 'i18n'
 require 'thor'
 require 'thor/group'
 require 'thor/actions'
+require 'cloudfiles'
 
 module MelissaData
   module_function

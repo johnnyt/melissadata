@@ -10,8 +10,8 @@ Vagrant::Config.run do |config|
 
   config.vm.forward_port 'melissadata', 1404, 14004
 
-  # config.vm.customize do |vm|
-  #   vm.cpu_count = 2
-  #   vm.memory_size = 1024
-  # end
+  config.vm.customize do |vm|
+    vm.cpu_count = 2
+    vm.memory_size = 1024
+  end
 end

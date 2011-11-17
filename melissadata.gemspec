@@ -23,8 +23,10 @@ Gem::Specification.new do |s|
   s.add_dependency 'awesome_print'
   s.add_dependency 'yajl-ruby'
   s.add_dependency 'cloudfiles'
+  s.add_dependency 'commander'
 
   s.add_development_dependency 'rake'
+  s.add_development_dependency 'vagrant'
   s.add_development_dependency 'rspec', '>2.4'
   s.add_development_dependency 'growl'
   s.add_development_dependency 'guard-rspec'

@@ -55,6 +55,19 @@ module MelissaData::VagrantPlugin::Actions
     def sudo(command)
       @vm.ssh.execute{ |ssh| ssh.sudo! command }
     end
+
+    protected
+
+    def source_paths_and_names
+      # Examples:
+      # DQ-DVD-2011-05
+      # GEO-DVD-2011-Q2
+      @paths_and_names ||= Dir['/Volumes/*-DVD-*/**/md*Ref.pdf'].map do |path|
+        dir = File.dirname(path)
+        name = path.match(/md(.*)Ref\.pdf/).captures.first
+        [dir, name]
+      end
+    end
   end
 
 end

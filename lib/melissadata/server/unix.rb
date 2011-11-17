@@ -8,6 +8,7 @@ module MelissaData::Server
       trap("TERM") { self.stop }
 
       @socket_file = MelissaData::DEFAULT_SOCKET_FILE
+      File.delete @socket_file if File.exists? @socket_file
       listener = MessagePack::RPC::UNIXServerTransport.new @socket_file
       server.listen(listener, self)
       puts "== MelissaData Unix server is running - socket file: #{@socket_file}"

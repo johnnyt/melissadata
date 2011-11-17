@@ -1,12 +1,10 @@
 module MelissaData::Server
 
   class TCP < Base
-    def run
+    def run(host=MelissaData::DEFAULT_TCP_ADDRESS, port=MelissaData::DEFAULT_TCP_PORT)
       trap("INT")  { self.stop }
       trap("TERM") { self.stop }
 
-      host = MelissaData::DEFAULT_TCP_ADDRESS
-      port = MelissaData::DEFAULT_TCP_PORT
       server.listen(host, port, self)
 
       puts "== MelissaData TCP server is now listening on #{host}:#{port}"
