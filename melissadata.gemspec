@@ -13,18 +13,18 @@ Gem::Specification.new do |s|
   s.description = s.summary
   s.require_paths = %w[ lib ]
   s.files = Dir["**/*"].map{ |f| f.to_s }
-  s.executables   = Dir['bin/*'].map{ |f| File.basename(f) }
+  s.executables = %w[ md_unix_server md_tcp_server ]
 
-  s.add_dependency 'i18n'
   s.add_dependency 'thor'
   s.add_dependency 'activesupport'
-  s.add_dependency 'multi_json'
   s.add_dependency 'msgpack-rpc'
-  s.add_dependency 'awesome_print'
-  s.add_dependency 'yajl-ruby'
   s.add_dependency 'cloudfiles'
-  s.add_dependency 'commander'
 
+  s.add_development_dependency 'i18n'
+  s.add_development_dependency 'multi_json'
+  s.add_development_dependency 'awesome_print'
+  s.add_development_dependency 'yajl-ruby'
+  s.add_development_dependency 'commander'
   s.add_development_dependency 'rake'
   s.add_development_dependency 'vagrant'
   s.add_development_dependency 'rspec', '>2.4'

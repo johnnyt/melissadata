@@ -15,4 +15,4 @@ _site
 *.watchr
 *.rbc
 
-.vagrant
+.vagrant*

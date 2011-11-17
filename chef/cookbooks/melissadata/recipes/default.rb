@@ -1,8 +1,9 @@
 include_recipe 'ubuntu'
+include_recipe 'build-essential'
 
 package 'git-core'
 
-%w[ rake bundler i18n thor activesupport multi_json yajl-ruby curl ].each{ |gem| gem_package gem }
+%w[ rake bundler i18n thor cloudfiles activesupport multi_json yajl-ruby curl ].each{ |gem| gem_package gem }
 
 %w[ src lib data ].each do |subdir|
   directory "/opt/melissadata/#{subdir}" do
@@ -32,4 +33,3 @@ end
     action :enable
   end
 end
-

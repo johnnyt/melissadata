@@ -12,7 +12,7 @@
 
 NAME=md_unix_server
 SCRIPTNAME=/etc/init.d/$NAME
-DAEMON=/usr/bin/$NAME
+DAEMON=<%= node[:melissadata][:paths][:bin_dir] %>/$NAME
 PID_FILE=/var/run/$NAME.pid
 RUNASUSER=<%= node[:melissadata][:runner_user] %>
 ARGS=""

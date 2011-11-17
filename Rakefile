@@ -2,9 +2,11 @@ bundler_installed = !!(%x[gem list] =~ /^bundler/) && File.exists?('Gemfile.lock
 
 desc "Setup the local environment"
 task :setup do
-  sh %Q!gem install bundler --no-ri --no-rdoc! unless bundler_installed
+  sh %Q!gem install bundler --pre --no-ri --no-rdoc! unless bundler_installed
   output = `bundle check 2>&1`
-  unless $?.to_i == 0
+  if $?.to_i == 0
+    puts "Bundler is up to date."
+  else
     sh "bundle install"
   end
 
@@ -12,17 +14,7 @@ task :setup do
     sh "bundle exec vagrant box add lucid64 http://files.vagrantup.com/lucid64.box"
   end
 
-  # sh "bundle exec vagrant up"
-
-  # puts <<-STR
-
-
-  #   Now make sure you have a MelissaData DVD (or .dmg) mounted (e.g. IPL-DVD-2011-Q1),
-  #   then run:
-
-  #     rake md:install
-
-  # STR
+  sh "bundle exec vagrant up"
 end
 
 if bundler_installed

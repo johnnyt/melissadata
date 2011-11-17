@@ -1,11 +1,20 @@
-$LOAD_PATH.unshift File.expand_path('..', File.dirname(__FILE__)) unless $LOAD_PATH.include?(File.expand_path('..', File.dirname(__FILE__)))
+root_path = File.expand_path('..', File.dirname(__FILE__))
+$LOAD_PATH.unshift root_path unless $LOAD_PATH.include?(root_path)
 require 'rubygems'
-require 'pathname'
-require 'i18n'
-require 'thor'
-require 'thor/group'
-require 'thor/actions'
-require 'cloudfiles'
+
+# Development
+begin
+#   require 'bundler'
+#   Bundler.require
+# rescue
+  require 'pathname'
+  require 'i18n'
+  require 'thor'
+  require 'thor/group'
+  require 'thor/actions'
+  require 'cloudfiles'
+# rescue
+end
 
 module MelissaData
   module_function

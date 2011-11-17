@@ -21,30 +21,23 @@ Make sure these are all installed on your development machine:
 
 ## Quick Start
 
-Once all the prereqs are installed, this should get you a running
-Vagrant VM:
+Once all the prereqs are installed, run these commands to get your local
+environment setup:
 
     git clone git://github.com/johnnyt/melissadata.git
     cd melissadata
     rake setup
 
-Now make sure you have a MelissaData DVD (or .dmg) mounted (e.g. IPL-DVD-2011-Q1), and run:
+Now make sure you have your MelissaData license string and a MelissaData DVD
+(or .dmg) mounted (e.g. IPL-DVD-2011-Q1), and run:
 
-    rake install_md
+    rake md:install
 
-Then SSH into the Vagrant VM:
+Now you should be able to fire up an IRB session `irb -r melissadata`
+and run:
 
-    bundle exec vagrant ssh
-
-Once logged into the VM - run:
-
-    cd /opt/melissadata/gem
-    irb -r lib/md
-
-Inside the IRB session run:
-
-    irb> ip = MelissaData::NativeObject::IpLocator.new :license => 'YOUR_LICENSE_KEY'
-    irb> ip.process :ip => '74.125.224.81'
+    irb> md = MelissaData.client
+    irb> md.ip '74.125.224.81'
 
 which should return:
 

@@ -45,8 +45,8 @@ module MelissaData::VagrantPlugin::Actions
         end
 
         sudo "chown -R vagrant:vagrant #{target_root}"
-        sudo "/etc/init.d/md_tcp_server start"
-        sudo "/etc/init.d/md_unix_server start"
+        sudo "/etc/init.d/md_tcp_server restart"
+        sudo "/etc/init.d/md_unix_server restart"
       else
         env.ui.error "Vagrant VM is not running", :prefix => false
       end
