@@ -28,6 +28,7 @@ module MelissaData::NativeObject
 
     def assign_values
       @output = {
+        :ip => input[:ip],
         :domain_name => obj.GetDomainName,
         :isp => obj.GetISP,
         :city => obj.GetCity,
